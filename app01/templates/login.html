@@ -1,0 +1,116 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>登录</title>
+    <!-- 引入bootstrap核心样式 -->
+    <link rel="stylesheet" href="{% static 'plugins/bootstrap-3.4.1/css/bootstrap.min.css' %}">
+    <!-- 引入自定义样式 -->
+    <link rel="stylesheet" href="{% static 'css/login.css' %}">
+    <style>
+        .account {
+            width: 400px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            box-shadow: 5px 5px 20px #aaa;
+            margin: 100px auto;
+            padding: 20px 40px;
+            background-color: #e0f7e1; /* 浅绿色背景 */
+        }
+
+        .account h2 {
+            margin-top: 10px;
+            text-align: center;
+        }
+
+        body::before {
+            content: "";
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 30%; /* 左侧背景图片宽度 */
+            height: 70%;
+            background-image: url('{% static "img/xizhuang.png" %}'); /* 确保路径正确 */
+            background-size: cover;
+            background-repeat: no-repeat;
+            z-index: -1; /* 确保位于页面内容的下方 */
+        }
+
+           body::after {
+                    content: "";
+                    position: fixed;
+                    bottom: 0; /* 将 top 设置为 0，让伪元素位于页面顶部 */
+                    right: 0; /* 将 right 设置为 0，让伪元素位于页面右侧 */
+                    width: 30%; /* 左侧背景图片宽度 */
+                    height: 70%;
+                    background-image: url('{% static "img/chong.png" %}'); /* 确保路径正确 */
+                    background-size: cover;
+                    background-repeat: no-repeat;
+                    z-index: -1; /* 确保位于页面内容的下方 */
+                }
+        .account {
+         background-color: rgb(90, 151, 29,0.1); }/* 使用平滑的背景颜色 */
+        .antd-pro-src-layouts-login-page-righttop {
+            position: absolute;
+            top: 20px;
+            right: 50px;
+            z-index: 0; /* 确保位于页面内容的上方 */
+            /* 可以根据需要添加其它样式 */
+        }
+        .btn-link {
+                    color: black; /* 默认字体颜色为黑色 */
+                }
+        .btn-link:hover {
+            color: red; /* 悬停时字体颜色为红色 */
+            }
+    </style>
+</head>
+<body class="custom-background">
+<div class="antd-pro-src-layouts-login-page-righttop">
+    <div>
+        <a href="https://xinxuan818.com/" target="_blank" rel="noopener noreferrer">
+            <img src="https://s.xinc818.com/files/webcilldgr0xct6q73a/logo@2x.png" alt="logo" style="cursor: pointer; height: 50px;">
+    </a>
+    </div>
+</div>
+<div class="account">
+    <h2>管理员登录</h2>
+    <form action="" method="post" novalidate>
+        {% csrf_token %}
+        <div class="form-group">
+            <label>用户名</label>
+            {{ form.username }}
+            <span style="color: red">{{ form.username.errors.0 }}</span>
+        </div>
+        <div class="form-group">
+            <label>密码</label>
+            {{ form.password }}
+            <span style="color: red">{{ form.password.errors.0 }}</span>
+        </div>
+        <div class="form-group">
+            <label for="id_code">图片验证码</label>
+            <div class="row">
+                <div class="col-xs-7">
+                    {{ form.code }}
+                    <span style="color: red">{{ form.code.errors.0 }}</span>
+                </div>
+                <div class="col-xs-5">
+                    <img id="image_code" src="/image/code/" style="width: 125px">
+                </div>
+            </div>
+        </div>
+        <input type="submit" value="登录" class="btn btn-primary">
+        <div>
+            <br>
+            <a href="/register/" class="btn-link">没有账户？去注册</a>
+        </div>
+    </form>
+</div>
+
+<!-- 引入jquery核心js文件 -->
+<script src="{% static 'js/jquery-3.6.0.js' %}"></script>
+<!-- 引入bootstrap核心js文件 -->
+<script src="{% static 'plugins/bootstrap-3.4.1/js/bootstrap.min.js' %}"></script>
+</body>
+</html>

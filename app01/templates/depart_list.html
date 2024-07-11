@@ -1,0 +1,82 @@
+{% extends 'layout.html' %}
+
+{% block title %}
+    项目组数据
+{% endblock title %}
+
+{% block content %}
+    <div class="container">
+        {#新建按钮#}
+        <div style="margin-bottom: 10px">
+            <a class="btn btn-success" href="/depart/add/">
+                <span class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span>
+                新增数据
+            </a>
+
+        </div>
+         {# 搜索部分 #}
+                <div style="float: right">
+                    <form class="navbar-form navbar-left" >
+                        <div class="form-group">
+                            <label>活动项目：</label>
+                            <input type="text" class="form-control " placeholder="Search" name="title"
+                                   value="{{ title }}">
+                            <label>活动名称：</label>
+                            <input type="text" class="form-control " placeholder="Search" name="hd_name"
+                                   value="{{ hd_name }}">
+
+                        </div>
+                        <button type="submit" class="btn btn-default">
+                            <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
+                            查找
+                        </button>
+                    </form>
+                </div>
+
+        {#面板#}
+        <div class="panel panel-default">
+            <!-- Default panel contents -->
+            <div class="panel-heading">
+                <span class="glyphicon glyphicon-th-list" aria-hidden="true"></span>
+                项目组数据
+            </div>
+
+            <!-- Table -->
+            <table class="table table-bordered table-striped table-hover">
+                <thead>
+                <tr>
+                    <th>序号</th>
+                    <th>活动项目描述</th>
+                    <th>规格</th>
+                    <th>综合单价</th>
+                    <th>活动名称</th>
+                    <th>创建时间</th>
+                    <th>操作</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for obj in queryset %}
+                    <tr>
+                        <th>{{ forloop.counter }}</th>
+                        <td>{{ obj.title }}</td>
+                        <td>{{ obj.guige }}</td>
+                        <td>{{ obj.price }}</td>
+                        <td>{{ obj.hd_name }}</td>
+                        <td>{{ obj.created }}</td>
+                        <td>
+                            <a href="/depart/{{ obj.id }}/edit/" class="btn btn-primary btn-xs">编辑</a>
+                            <a href="/depart/{{ obj.id }}/delete/" class="btn btn-danger btn-xs">删除</a>
+                        </td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+
+        {# 分页 #}
+        <ul class='pagination'>
+            {{ page_string }}
+        </ul>
+    </div>
+
+{% endblock content %}

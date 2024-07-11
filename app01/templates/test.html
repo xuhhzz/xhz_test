@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>jsgif 示例</title>
+
+    <!-- 引入 jsgif 库 -->
+    <script src="https://cdn.jsdelivr.net/npm/@shachaf/jsgif@latest/dist/jsgif.min.js"></script>
+</head>
+<body>
+    <canvas id="gif-canvas" width="300" height="300"></canvas>
+
+    <script>
+        // 创建 GIF 对象
+        const gif = new GIF();
+
+        // 添加 6 帧图像（可替换为你自己的图片）
+        for (let i = 0; i < 6; i++) {
+            const img = new Image();
+            img.src =  url('../img/bg.png');
+            gif.addFrame(img, {delay: 100});
+        }
+
+        // 设置 GIF 参数
+        gif.setRepeat(0); // 无限循环
+        gif.setQuality(10); // 设置质量（1-10）
+
+        // 绘制到 canvas 上
+        const canvas = document.getElementById('gif-canvas');
+        const ctx = canvas.getContext('2d');
+        gif.render(ctx);
+
+        // 下载 GIF 文件
+        setTimeout(() => {
+            const link = document.createElement('a');
+            link.href = gif.getDataUrl();
+            link.download = 'example.gif';
+            link.click();
+        }, 1000);
+    </script>
+</body>
+</html>
